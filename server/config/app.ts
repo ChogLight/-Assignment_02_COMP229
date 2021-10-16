@@ -7,14 +7,16 @@ import indexRouter from '../routes/index';
 import  mongoose  from 'mongoose';
 
 
+
 //instantiate mongo
 
-mongoose.connect('mongodb://localhost:27017/');
+import * as DbConfig from './db'
+mongoose.connect(DbConfig.LocalURI);
 
 const db = mongoose.connection;
 db.on('error',console.error.bind(console, 'connection error'));
 db.once('open', function(){
-  console.log('connected to MongoDB at: mongodb://localhost:27017/')
+  console.log('connected to MongoDB at: ' + DbConfig.HostName)
 })
 
 var app = express();
