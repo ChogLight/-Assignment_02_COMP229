@@ -3,7 +3,7 @@ import debug from 'debug';
 debug('assignment01:server');
 import http from 'http';
 import createError from 'http-errors';
-import app from './app';
+import app from './server/config/app';
 /**
  * Module dependencies.
  */
