@@ -15,16 +15,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for(let count=0; count < contact.lenght; count++ ) {%>
+                  <% for(let count=0; count < contact.length; count++ ) {%>
                     <tr>
                         <th scope="row">
-                          <%= count +1 %>
+                            <%= count +1 %>
                         </th>
-                        <td><%= contact[count].contactName %></td>
-                        <td><%= contact[count].contactNumber %></td>
-                        <td><%= contact[count].email %></td>
-                    </tr>
-                  <% } %>
+                        <td>
+                            <%= contact[count].contactName %>
+                        </td>
+                        <td>
+                            <%= contact[count].contactNumber %>
+                        </td>
+                        <td>
+                            <%= contact[count].email %>
+                        </td>
+                      </tr>
+                    <% } %>
                 </tbody>
               </table>
         </div>

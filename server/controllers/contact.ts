@@ -6,7 +6,7 @@ export function DisplayContactListPage(req:express.Request, res:express.Response
             console.error(err);
             res.end(err);
         }
-        console.log(contactCollection);
+        //console.log(contactCollection);
         res.render('index', {title:'Contact List', page: 'contacts/contact-list', contact: contactCollection})
     })
 };
