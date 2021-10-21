@@ -46,7 +46,7 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../client')));
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../node_modules')));
-app.use('/', index_1.default);
+app.use('', index_1.default);
 app.use('/contact', contact_1.default);
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));

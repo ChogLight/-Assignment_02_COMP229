@@ -1,5 +1,5 @@
 import express from 'express';
-import { DisplayContactListPage } from '../controllers/contact';
+import { DisplayListPage } from '../controllers/contact';
 
 const router = express.Router();
 
@@ -13,14 +13,7 @@ const router = express.Router();
 
 //Get display contact list view
 
-router.get('/list', DisplayContactListPage);
-
-
-
-
-
-
-
+router.get('/list', DisplayListPage);
 
 
 
