@@ -17,3 +17,10 @@ export function DisplayServicesPage(req:express.Request, res:express.Response, n
 export function DisplayContactPage(req:express.Request, res:express.Response, next:express.NextFunction) {
     res.render('index', { title: 'Contact me', page: 'contact' });
   };
+
+  export function DisplayLoginPage(req:express.Request, res:express.Response, next:express.NextFunction) {
+    res.render('index', { title: 'Login', page: 'auth/login' });
+  };
+  export function DisplayRegisterPage(req:express.Request, res:express.Response, next:express.NextFunction) {
+    res.render('index', { title: 'Register', page: 'auth/register' });
+  };

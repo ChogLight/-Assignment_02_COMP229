@@ -12,5 +12,7 @@ router.get('/about', controllers_1.DisplayAboutPage);
 router.get('/projects', controllers_1.DisplayProjectsPage);
 router.get('/services', controllers_1.DisplayServicesPage);
 router.get('/contact', controllers_1.DisplayContactPage);
+router.get('/login', controllers_1.DisplayLoginPage);
+router.get('/register', controllers_1.DisplayRegisterPage);
 exports.default = router;
 //# sourceMappingURL=index.js.map
