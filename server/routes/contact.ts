@@ -10,9 +10,9 @@ const router = express.Router();
 router.get('/list', DisplayListPage);
 router.get('/add', DisplayAddPage);
 router.get('/edit/:id', DisplayEditPage);
-router.get('/edit/:id', ExecuteEdit);
-router.get('/add', ExecuteAdd);
-router.get('/delete', ExecuteDelete);
+router.post('/edit/:id', ExecuteEdit);
+router.post('/add', ExecuteAdd);
+router.get('/delete/:id', ExecuteDelete);
 
 
 export default router;

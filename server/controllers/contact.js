@@ -41,6 +41,7 @@ function ExecuteEdit(req, res, next) {
         "contactNumber": req.body.contactNumber,
         "email": req.body.email
     });
+    console.log(updatedItem);
     contact_1.default.updateOne({ _id: id }, updatedItem, {}, (err) => {
         if (err) {
             console.error(err);

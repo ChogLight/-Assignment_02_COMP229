@@ -34,17 +34,17 @@ export function DisplayEditPage(req:express.Request, res:express.Response, next:
 }
 
 // Execute Edit Page
-export function ExecuteEdit(req:express.Request, res:express.Response, next:express.NextFunction){
+export function ExecuteEdit(req: express.Request, res: express.Response, next: express.NextFunction){
     let id = req.params.id;
 
     let updatedItem = new contactModel({
-        "_id":id,
+        "_id": id,
         "contactName": req.body.contactName,
         "contactNumber": req.body.contactNumber,
         "email": req.body.email
     });
-
-    contactModel.updateOne({ _id:id }, updatedItem, {}, (err) => {
+    console.log(updatedItem);
+    contactModel.updateOne({ _id: id }, updatedItem, {}, (err) => {
         if(err) {
             console.error(err);
             res.end(err);
@@ -58,7 +58,7 @@ export function ExecuteEdit(req:express.Request, res:express.Response, next:expr
 export function ExecuteAdd(req:express.Request, res:express.Response, next:express.NextFunction): void{
 
     let newItem = new contactModel({
-        "contactName":req.body.contactName,
+        "contactName": req.body.contactName,
         "contactNumber": req.body.contactNumber,
         "email": req.body.email
     });
@@ -79,7 +79,7 @@ export function ExecuteDelete(req:express.Request, res:express.Response, next:ex
 
     let id = req.params.id;
 
-    contactModel.remove({_id:id}, (err) => {
+    contactModel.remove({ _id: id }, (err) => {
         if(err){
             console.error(err);
             res.end(err);
