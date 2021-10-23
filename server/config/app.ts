@@ -11,7 +11,7 @@ import contactRouter from '../routes/contact';
 //instantiate mongo
 
 import * as DbConfig from './db'
-mongoose.connect(DbConfig.LocalURI);
+mongoose.connect((DbConfig.RemoteURI) ? DbConfig.RemoteURI:DbConfig.LocalURI);
 
 const db = mongoose.connection;
 db.on('error',console.error.bind(console, 'connection error'));
@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../client')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
-app.use('', indexRouter);
+app.use('/', indexRouter);
 app.use('/contact', contactRouter);
 
 // catch 404 and forward to error handler

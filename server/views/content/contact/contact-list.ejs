@@ -29,10 +29,18 @@
                         <td>
                             <%= contact[count].email %>
                         </td>
+                        <td>
+                          <a href="/contact/edit/<%= contact[count]._id %>" class="btn btn-dark btn-sm edit"><i class="fas fa-edit fa-sm"></i> Edit</a>
+                        </td>
+                        <td>
+                          <a href="/contact/delete/<%= contact[count]._id %>" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt fa-sm"></i> Delete</a>
+                        </td>
                       </tr>
                     <% } %>
                 </tbody>
               </table>
+              <br>
+              <a href="/contact/add" id="addButton" class="btn btn-dark mb-1"><i class="fas fa-plus-circle"></i> Add Contact</a>
         </div>
     </div>
 </div>
