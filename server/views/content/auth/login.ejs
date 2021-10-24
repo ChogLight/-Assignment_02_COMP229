@@ -1,17 +1,52 @@
-<div class="container">
-    <h1>
-        <%=title%>
-    </h1>
-    <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required> 
+<div class="row">
+  <div class="offset-md-3 col-md-6 col-sm-12">
+        <div class="login" id="contentArea">
+            <h1 class="display-4">Login</h1>
+
+            <!-- message area -->
+            <% if(messages.length > 0) { %>
+            <div id="messageArea" class="alert alert-danger">
+              <%= messages %>
+            </div>
+            <% } %>
+            <br>
+            <form id="loginForm" novalidate method="POST">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-user">
+                    </i>
+                    &nbsp;
+                  </span>
+                  <input type="text" class="form-control" id="username" name="username"  required
+                  value="" placeholder="Enter your username">
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-lock">
+                    </i>
+                    &nbsp;
+                  </span>
+                  <input type="password" class="form-control" id="password" name="password"  required
+                  value="" placeholder="Enter your password">
+                </div>
+               
+              </div>         
+              <br>                               
+              <div class="text-end mt-2">
+                <button id="loginButton" type="submit" class="btn btn-dark"><i class="fas fa-sign-in-alt"></i> Login</button> &nbsp;
+                <button id="cancelButton" type="reset" class="btn btn-warning"><i class="fas fa-undo"></i> Cancel</button>
+              </div>
+            </form>
+           
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" required>
-        </div>
-        <button type="submit" class="btn btn-dark">Submit</button>
-        <a href="/register" id="registerButton" type="button" class="btn btn-dark"> Register</a>
-      </form>
+        <br>
+        <p class="text-center text-muted small">
+          Don't have an account? 
+          <a href="/auth/register">Register Here!</a>
+        </p>
+  </div>
 </div>

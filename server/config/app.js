@@ -27,10 +27,27 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
-const index_1 = __importDefault(require("../routes/index"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const contact_1 = __importDefault(require("../routes/contact"));
+const auth_1 = require("../middleware/auth");
+const passport_1 = __importDefault(require("passport"));
+const connect_mongo_1 = __importDefault(require("connect-mongo"));
+const express_session_1 = __importDefault(require("express-session"));
+const connect_flash_1 = __importDefault(require("connect-flash"));
 const DbConfig = __importStar(require("./db"));
+const StoreOptions = {
+    store: connect_mongo_1.default.create({
+        mongoUrl: (DbConfig.RemoteURI) ? DbConfig.RemoteURI : DbConfig.LocalURI
+    }),
+    secret: DbConfig.Secret,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: 600000
+    }
+};
+const contact_1 = __importDefault(require("../routes/contact"));
+const index_1 = __importDefault(require("../routes/index"));
+const user_1 = __importDefault(require("../routes/user"));
 mongoose_1.default.connect((DbConfig.RemoteURI) ? DbConfig.RemoteURI : DbConfig.LocalURI);
 const db = mongoose_1.default.connection;
 db.on('error', console.error.bind(console, 'connection error'));
@@ -46,8 +63,12 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../client')));
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../node_modules')));
+app.use((0, connect_flash_1.default)());
+app.use((0, express_session_1.default)(StoreOptions));
+app.use(passport_1.default.initialize());
 app.use('/', index_1.default);
-app.use('/contact', contact_1.default);
+app.use('/contact', auth_1.isLoggedIn, contact_1.default);
+app.use('/auth', user_1.default);
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));
 });

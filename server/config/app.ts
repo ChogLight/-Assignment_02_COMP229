@@ -3,14 +3,33 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import indexRouter from '../routes/index';
 import  mongoose  from 'mongoose';
+import { isLoggedIn } from '../middleware/auth';
+import passport from 'passport';
+import MongoStore from 'connect-mongo';
+import session from 'express-session';
+import flash from 'connect-flash';
+import * as DbConfig from './db'
+
+
+const StoreOptions = {
+  store: MongoStore.create({
+    mongoUrl: (DbConfig.RemoteURI) ? DbConfig.RemoteURI : DbConfig.LocalURI
+  }),
+  secret: DbConfig.Secret,
+  saveUninitialized: false,
+  resave: false,
+  cookie: {
+    maxAge: 600000
+  }
+}
+
 import contactRouter from '../routes/contact';
-
-
+import indexRouter from '../routes/index';
+import userRouter from '../routes/user';
 //instantiate mongo
 
-import * as DbConfig from './db'
+
 mongoose.connect((DbConfig.RemoteURI) ? DbConfig.RemoteURI:DbConfig.LocalURI);
 
 const db = mongoose.connection;
@@ -34,8 +53,24 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../client')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
+
+//setup flash
+
+app.use(flash());
+
+//express session
+
+app.use(session(StoreOptions));
+
+//passport
+
+app.use(passport.initialize());
+
+//router middleware
+
 app.use('/', indexRouter);
-app.use('/contact', contactRouter);
+app.use('/contact', isLoggedIn, contactRouter);
+app.use('/auth', userRouter );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
