@@ -65,6 +65,7 @@ app.use(session(StoreOptions));
 //passport
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 //router middleware
 

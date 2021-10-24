@@ -66,6 +66,7 @@ app.use(express_1.default.static(path_1.default.join(__dirname, '../../node_modu
 app.use((0, connect_flash_1.default)());
 app.use((0, express_session_1.default)(StoreOptions));
 app.use(passport_1.default.initialize());
+app.use(passport_1.default.session());
 app.use('/', index_1.default);
 app.use('/contact', auth_1.isLoggedIn, contact_1.default);
 app.use('/auth', user_1.default);
